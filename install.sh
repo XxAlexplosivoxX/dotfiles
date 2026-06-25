@@ -4,7 +4,7 @@ DEPS_PKGS=(base-devel git)
 CORE_PKGS=(hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
 AUDIO_PKGS=(pipewire pipewire-alsa pipewire-pulse wireplumber pamixer)
 UTILS_PKGS=(waybar kitty grim slurp wl-clipboard stow nautilus)
-AUR_PKGS=(swww rofi-lbonn-wayland-git hyprlock hypridle)
+AUR_PKGS=(wallust swww rofi-lbonn-wayland-git hyprlock hypridle)
 AUR_HELPERS=(paru yay)
 REINTENTOS=3
 AUR_HELPER=""
@@ -141,6 +141,9 @@ install_loop "pacman" "${FONT_PKGS[@]}"
 
 echo "instalando paquetes de utilidades generales"
 install_loop "pacman" "${UTILS_PKGS[@]}"
+
+echo "instalando paquetes AUR necesarios"
+install_loop "$AUR_HELPER" "${AUR_PKGS[@]}"
 
 ###############################
 # ENLAZAMIENTO DE LAS CONFIGS #
