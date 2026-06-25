@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEPS_PKGS=(base-devel git curl tar jq)
-CORE_PKGS=(ly hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
+CORE_PKGS=(fish ly hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
 AUDIO_PKGS=(pipewire pipewire-alsa pipewire-pulse wireplumber pamixer)
 UTILS_PKGS=(waybar kitty grim slurp wl-clipboard stow nautilus)
 AUR_PKGS=(wallust awww fuzzel hyprlock hypridle)
@@ -103,35 +103,36 @@ link_config() {
 echo "instalando dependencias del script..."
 install_loop "pacman" "${DEPS_PKGS[@]}"
 
-echo "Cual AUR helper prefieres usar?"
-echo "1) Yay"
-echo "2) Paru"
-read opcion
+## Al usar chaotic-AUR creo que esto ni necesario es
+# echo "Cual AUR helper prefieres usar?" 
+# echo "1) Yay"
+# echo "2) Paru"
+# read opcion
 
-case "$opcion" in
-	1)
-	if ! is_installed "yay"; then
-		echo "instalando Yay"
-		git clone https://aur.archlinux.org/yay.git && (cd yay && makepkg -si)
-	else
-		echo "Yay ya está instalado"
-	fi
-	AUR_HELPER=yay
-	;;
-	2)
-	if ! is_installed "paru"; then
-		echo "instalando Paru"
-		git clone https://aur.archlinux.org/paru.git && (cd paru && makepkg -si)
-	else
-		echo "Paru ya está instalado"
-	fi
-	AUR_HELPER=paru
-	;;
-	*)
-	echo "esa opción no existe, abortando"
-	exit 1
-	;;
-esac
+# case "$opcion" in
+# 	1)
+# 	if ! is_installed "yay"; then
+# 		echo "instalando Yay"
+# 		git clone https://aur.archlinux.org/yay.git && (cd yay && makepkg -si)
+# 	else
+# 		echo "Yay ya está instalado"
+# 	fi
+# 	AUR_HELPER=yay
+# 	;;
+# 	2)
+# 	if ! is_installed "paru"; then
+# 		echo "instalando Paru"
+# 		git clone https://aur.archlinux.org/paru.git && (cd paru && makepkg -si)
+# 	else
+# 		echo "Paru ya está instalado"
+# 	fi
+# 	AUR_HELPER=paru
+# 	;;
+# 	*)
+# 	echo "esa opción no existe, abortando"
+# 	exit 1
+# 	;;
+# esac
 
 echo "instalando paquetes escenciales"
 install_loop "pacman" "${CORE_PKGS[@]}"
@@ -190,6 +191,23 @@ install_loop "pacman" "${AUR_PKGS[@]}"
 link_config "$DOTFILES_DIR/hypr" "$CONFIG_DIR/hypr"
 link_config "$DOTFILES_DIR/kitty" "$CONFIG_DIR/kitty"
 
+
+mkdir -p ~/.local/bin
 cp set-wallpaper ~/.local/bin/set-wallpaper
 
+FISH_PATH=$(command -v fish)
+echo "Fish detectado en: $FISH_PATH"
+
+echo "Inyectando ~/.local/bin en las variables de Fish..."
+mkdir -p "$HOME/.local/bin"
+fish -c "fish_add_path $HOME/.local/bin"
+
+CURRENT_SHELL=$(basename "$SHELL")
+if [ "$CURRENT_SHELL" != "fish" ]; then
+	echo "Cambiando la shell por defecto a Fish para el usuario $USER..."
+	chsh -s "$FISH_PATH" "$USER"	
+	echo "Shell por defecto cambiada con éxito. Surtiendo efecto en el próximo login."
+else
+	echo "Fish ya es tu shell por defecto."
+fi
 hyprctl reload
