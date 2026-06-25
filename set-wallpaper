@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# ~/.local/bin/set-wallpaper
+
+WALLPAPER="$1"
+
+wallust run "$WALLPAPER"
+
+killall -USR1 kitty 2>/dev/null
+
+killall -USR2 waybar 2>/dev/null
+
+swww img "$WALLPAPER" --transition-type ease

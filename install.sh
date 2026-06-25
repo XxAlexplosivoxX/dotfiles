@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEPS_PKGS=(base-devel git)
-CORE_PKGS=(hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
+CORE_PKGS=(ly hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
 AUDIO_PKGS=(pipewire pipewire-alsa pipewire-pulse wireplumber pamixer)
 UTILS_PKGS=(waybar kitty grim slurp wl-clipboard stow nautilus)
 AUR_PKGS=(wallust swww rofi-lbonn-wayland-git hyprlock hypridle)
@@ -135,6 +135,8 @@ esac
 
 echo "instalando paquetes escenciales"
 install_loop "pacman" "${CORE_PKGS[@]}"
+sudo systemctl disable getty@tty2.service
+sudo systemctl enable ly@tty2.service
 
 echo "instalando fuentes necesarias"
 install_loop "pacman" "${FONT_PKGS[@]}"
