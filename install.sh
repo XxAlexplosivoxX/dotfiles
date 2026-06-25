@@ -145,7 +145,7 @@ echo "instalando paquetes de utilidades generales"
 install_loop "pacman" "${UTILS_PKGS[@]}"
 
 echo "instalando paquetes AUR necesarios"
-install_loop "$AUR_HELPER" "${AUR_PKGS[@]}"
+#install_loop "$AUR_HELPER" "${AUR_PKGS[@]}"
 
 ###############################
 # ENLAZAMIENTO DE LAS CONFIGS #
