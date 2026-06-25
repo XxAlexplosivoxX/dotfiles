@@ -1,0 +1,23 @@
+[opts]
+backend = "full"
+color_space = "lab"
+threshold = 11
+
+# --- 1. TEMAS GTK3 Y GTK4 ---
+[templates.gtk3]
+template = "gtk3.0/style.tmpl"
+target = "~/.config/gtk-3.0/gtk.css"
+
+[templates.gtk4]
+template = "gtk4.0/style.tmpl"
+target = "~/.config/gtk-4.0/gtk.css"
+
+# --- 2. KITTY TERMINAL ---
+[templates.kitty]
+template = "kitty/colors-wallust-kitty.tmpl"
+target = "~/.config/kitty/colors-wallust.conf"
+
+# --- 3. WAYBAR ---
+[templates.waybar]
+template = "waybar/colors-wallust.tmpl"
+target = "~/.config/waybar/colors-wallust.css"

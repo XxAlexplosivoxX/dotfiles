@@ -1,0 +1,60 @@
+{
+    "layer": "top", 
+    "position": "top", 
+    "height": 32, 
+    "spacing": 4, 
+    
+    // Distribución de los componentes en la barra
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "tray"],
+
+    // --- CONFIGURACIÓN DE LOS MÓDULOS ---
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "active-only": false,
+        "on-click": "activate",
+        "format": "{name}"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "clock": {
+        "timezone": "America/El_Salvador",
+        "format": "󱑂 {:%H:%M  󰃭 %a %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "format": "  {usage}%",
+        "tooltip": false,
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "  {}%",
+        "interval": 2
+    },
+
+    "network": {
+        "format-wifi": "   {essid}",
+        "format-ethernet": "󰈀  {ipaddr}",
+        "format-disconnected": "󰖪  Disconnected",
+        "tooltip-format-wifi": "Señal: {signalStrength}%",
+        "on-click": "kitty -e nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    }
+}

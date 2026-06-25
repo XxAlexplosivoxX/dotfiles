@@ -1,0 +1,68 @@
+/* Importar los colores extraídos automáticamente de tu fondo por wallust */
+@import "colors-wallust.css";
+
+/* Reset global y tipografía */
+* {
+    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+/* Contenedor principal de la barra */
+window#waybar {
+    background-color: rgba(26, 27, 38, 0.85); /* Caída por si wallust no corre */
+    background: @wallpaper-bg; /* Variable de tu plantilla de wallust */
+    color: @wallpaper-fg;
+    transition-property: background-color;
+    transition-duration: .5s;
+    border-bottom: 2px solid @color4;
+}
+
+/* Estilo para los bloques individuales (Módulos) */
+#workspaces,
+#clock,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#tray {
+    padding: 0 14px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Configuración específica de los Workspaces (Áreas de trabajo) */
+#workspaces button {
+    padding: 0 8px;
+    color: @wallpaper-fg;
+    background-color: transparent;
+}
+
+#workspaces button.active {
+    color: @wallpaper-bg;
+    background-color: @color4; /* Destaca el workspace activo */
+    border-radius: 4px;
+}
+
+#workspaces button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: @color2;
+}
+
+/* Detalles de alertas o estados críticos */
+#network.disconnected,
+#pulseaudio.muted {
+    color: @color1; /* Rojo/Alerta */
+    background-color: rgba(247, 118, 142, 0.1);
+}
+
+#clock {
+    color: @color5; /* Un tono diferente para el centro */
+}
+
+#tray {
+    background-color: transparent;
+}

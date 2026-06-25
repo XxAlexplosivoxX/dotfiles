@@ -1,12 +1,26 @@
 #!/usr/bin/env bash
-# ~/.local/bin/set-wallpaper
+
+if [ -z "$1" ]; then
+    echo "Uso: set-wallpaper /ruta/a/la/imagen.jpg"
+    exit 1
+fi
 
 WALLPAPER="$1"
 
+# 1. Ejecutar wallust (esto lee wallust.toml y escribe en todos tus 'target')
+echo "[+] Extrayendo colores y aplicando plantillas..."
 wallust run "$WALLPAPER"
 
-killall -USR1 kitty 2>/dev/null
+# 2. Actualizar el fondo en tu gestor Wayland (awww)
+echo "[+] Seteando fondo de pantalla con awww..."
+awww img "$WALLPAPER"
 
-killall -USR2 waybar 2>/dev/null
+# 3. Notificar en caliente a las terminales Kitty activas para que muten de color
+if pgrep -x "kitty" > /dev/null; then
+    killall -USR1 kitty
+fi
 
-swww img "$WALLPAPER" --transition-type ease
+# 4. Forzar a Waybar a recargar su CSS con los nuevos colores de wallust
+if pgrep -x "waybar" > /dev/null; then
+    killall -USR2 waybar
+fi

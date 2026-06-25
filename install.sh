@@ -195,8 +195,9 @@ link_config "$DOTFILES_DIR/kitty" "$CONFIG_DIR/kitty"
 mkdir -p ~/.local/bin
 cp set-wallpaper ~/.local/bin/set-wallpaper
 
-FISH_PATH=$(command -v fish)
-echo "Fish detectado en: $FISH_PATH"
+########################
+#### CONFIG DE FISH ####
+########################
 
 echo "Inyectando ~/.local/bin en las variables de Fish..."
 mkdir -p "$HOME/.local/bin"
@@ -205,9 +206,14 @@ fish -c "fish_add_path $HOME/.local/bin"
 CURRENT_SHELL=$(basename "$SHELL")
 if [ "$CURRENT_SHELL" != "fish" ]; then
 	echo "Cambiando la shell por defecto a Fish para el usuario $USER..."
-	chsh -s "$FISH_PATH" "$USER"	
+	chsh -s "/usr/bin/fish" "$USER"	
 	echo "Shell por defecto cambiada con éxito. Surtiendo efecto en el próximo login."
 else
 	echo "Fish ya es tu shell por defecto."
 fi
+
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install IlanCosman/tide@v6
+tide configure
+
 hyprctl reload

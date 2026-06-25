@@ -1,0 +1,83 @@
+/* ==============================================================================
+ * PLANTILLA GTK CON EFECTO GLASSY DINÁMICO (wallust)
+ * ============================================================================== */
+
+/* Extraemos los colores base de tu wallpaper */
+@define-color theme_bg_color {{background}};
+@define-color theme_fg_color {{foreground}};
+@define-color theme_selected_bg_color {{color4}};
+@define-color theme_selected_fg_color {{background}};
+
+@define-color window_bg_color {{background}};
+@define-color window_fg_color {{foreground}};
+
+/* ------------------------------------------------------------------------------
+ * CAPA DE ESTILOS PARA LOGRAR EL EFECTO DE VIDRIO (GLASSMORPHISM)
+ * ------------------------------------------------------------------------------ */
+
+/* Aplicar transparencia al fondo principal usando la función alpha de GTK */
+window, 
+.background, 
+dialog {
+    /* Toma tu color de fondo dinámico y lo vuelve 65% translúcido */
+    background-color: alpha(@theme_bg_color, 0.65) !important;
+    
+    /* Un borde sutilmente brillante usando el color de texto (foreground) muy suave */
+    border: 1px solid alpha(@theme_fg_color, 0.12) !important;
+    border-radius: 12px !important;
+    
+    /* Sombra profunda para que resalte sobre el fondo difuminado de Hyprland */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Barras superiores y de herramientas ligeramente más claras */
+headerbar,
+.titlebar,
+toolbar {
+    background-color: alpha(#ffffff, 0.03) !important;
+    background-image: none !important;
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.08) !important;
+    box-shadow: none !important;
+}
+
+/* Paneles laterales (Como el árbol de carpetas en Thunar) */
+.sidebar,
+stacksidebar,
+list {
+    background-color: alpha(#000000, 0.2) !important;
+    border-right: 1px solid alpha(@theme_fg_color, 0.05) !important;
+}
+
+/* Botones adaptados al esquema de color de tu rice */
+button {
+    background-color: alpha(@theme_fg_color, 0.05) !important;
+    background-image: none !important;
+    color: @theme_fg_color !important;
+    border: 1px solid alpha(@theme_fg_color, 0.1) !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+button:hover {
+    background-color: alpha(@theme_selected_bg_color, 0.2) !important;
+    border-color: @theme_selected_bg_color !important;
+    color: #ffffff !important;
+}
+
+button:checked, 
+button:active {
+    background-color: @theme_selected_bg_color !important;
+    color: @theme_selected_fg_color !important;
+}
+
+/* Cajas de entrada de texto (Inputs) */
+entry {
+    background-color: alpha(#000000, 0.3) !important;
+    border: 1px solid alpha(@theme_fg_color, 0.08) !important;
+    border-radius: 6px !important;
+    color: @theme_fg_color !important;
+}
+
+entry:focus {
+    border-color: @theme_selected_bg_color !important;
+}
