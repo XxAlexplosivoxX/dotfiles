@@ -135,8 +135,22 @@ esac
 
 echo "instalando paquetes escenciales"
 install_loop "pacman" "${CORE_PKGS[@]}"
-sudo systemctl disable getty@tty2.service
-sudo systemctl enable ly@tty2.service
+if sudo systemctl disable getty@tty2.service; then
+	echo "getty desactivado con éxito"
+fi
+if sudo systemctl enable ly@tty2.service; then
+	echo "ly habilitado con éxito en tty2"
+fi
+if [ -f "/etc/ly/config.ini" ]; then
+    echo "Configurando interfaz TUI de Ly con estilo Doom..."
+
+    sudo sed -i 's/^[# ]*animation[ ]*=.*/animation = doom/' /etc/ly/config.ini
+    sudo sed -i 's/^[# ]*bigclock[ ]*=.*/bigclock = en/' /etc/ly/config.ini
+
+    echo "Ly configurado con éxito."
+else
+    echo "! Advertencia: No se encontró /etc/ly/config.ini."
+fi
 
 echo "instalando fuentes necesarias"
 install_loop "pacman" "${FONT_PKGS[@]}"
