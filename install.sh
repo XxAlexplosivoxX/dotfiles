@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPS_PKGS=(base-devel git)
+DEPS_PKGS=(base-devel git curl tar jq)
 CORE_PKGS=(ly hyprland xdg-desktop-portal-hyprland qt5-wayland qt6-wayland xorg-xwayland)
 AUDIO_PKGS=(pipewire pipewire-alsa pipewire-pulse wireplumber pamixer)
 UTILS_PKGS=(waybar kitty grim slurp wl-clipboard stow nautilus)
@@ -158,8 +158,27 @@ install_loop "pacman" "${FONT_PKGS[@]}"
 echo "instalando paquetes de utilidades generales"
 install_loop "pacman" "${UTILS_PKGS[@]}"
 
-echo "instalando paquetes AUR necesarios"
-#install_loop "$AUR_HELPER" "${AUR_PKGS[@]}"
+##################################
+#### CHAOTIC-AUR pq pos nomas ####
+##################################
+
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+               'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
+
+if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
+    sudo bash -c 'cat <<EOF >> /etc/pacman.conf
+
+[chaotic-aur]
+Include = /etc/pacman.dev/chaotic-mirrorlist
+EOF'
+fi
+
+
+echo "instalando paquetes AUR necesarios desde pacman w"
+install_loop "pacman" "${AUR_PKGS[@]}"
 
 ###############################
 # ENLAZAMIENTO DE LAS CONFIGS #
