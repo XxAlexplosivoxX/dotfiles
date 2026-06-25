@@ -16,10 +16,10 @@ target = "~/.config/gtk-4.0/gtk.css"
 
 # --- 2. KITTY TERMINAL ---
 [templates.kitty]
-template = "kitty/colors-wallust-kitty.tmpl"
+template = "kitty/kitty.tmpl"
 target = "~/.config/kitty/colors-wallust.conf"
 
 # --- 3. WAYBAR ---
 [templates.waybar]
-template = "waybar/colors-wallust.tmpl"
+template = "waybar/waybar.tmpl"
 target = "~/.config/waybar/colors-wallust.css"
