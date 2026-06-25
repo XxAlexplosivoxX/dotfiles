@@ -147,4 +147,5 @@ install_loop "pacman" "${UTILS_PKGS[@]}"
 ###############################
 
 link_config "$DOTFILES_DIR/hypr" "$CONFIG_DIR/hypr"
+link_config "$DOTFILES_DIR/kitty" "$CONFIG_DIR/kitty"
 hyprctl reload
