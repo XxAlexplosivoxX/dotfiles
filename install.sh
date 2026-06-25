@@ -162,18 +162,21 @@ install_loop "pacman" "${UTILS_PKGS[@]}"
 #### CHAOTIC-AUR pq pos nomas ####
 ##################################
 
-sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign-key 3056513887B78AEB
+if grep -q "^\[chaotic-aur\]" /etc/pacman.conf; then
+	echo "configurando el repo de chaotic AUR" 
+	sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+	sudo pacman-key --lsign-key 3056513887B78AEB
 
-sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
-               'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
+	sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+				'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
 
-if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
     sudo bash -c 'cat <<EOF >> /etc/pacman.conf
 
 [chaotic-aur]
 Include = /etc/pacman.d/chaotic-mirrorlist
 EOF'
+else
+	echo "ya tienes configurado el repo de chaotic AUR"
 fi
 
 
@@ -186,4 +189,7 @@ install_loop "pacman" "${AUR_PKGS[@]}"
 
 link_config "$DOTFILES_DIR/hypr" "$CONFIG_DIR/hypr"
 link_config "$DOTFILES_DIR/kitty" "$CONFIG_DIR/kitty"
+
+cp ./set_wallpaper ~/.local/bin/set_wallpaper
+
 hyprctl reload
