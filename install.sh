@@ -172,7 +172,7 @@ if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
     sudo bash -c 'cat <<EOF >> /etc/pacman.conf
 
 [chaotic-aur]
-Include = /etc/pacman.dev/chaotic-mirrorlist
+Include = /etc/pacman.d/chaotic-mirrorlist
 EOF'
 fi
 
