@@ -10,6 +10,14 @@ REINTENTOS=3
 AUR_HELPER=""
 DOTFILES_DIR="$HOME/dotfiles/config"
 CONFIG_DIR="$HOME/.config"
+FONT_PKGS=(
+    "ttf-jetbrains-mono-nerd"
+    "ttf-font-awesome"
+    "ttf-dejavu"
+    "ttf-liberation"
+    "noto-fonts"
+    "noto-fonts-emoji"
+)
 
 if ! sudo -v; then
 	echo "error de autorización, vuelve a ejecutar el script"
@@ -79,7 +87,7 @@ link_config() {
 		rm "$destino"
 	elif [ -e "$destino" ]; then
 		echo "Hay un archivo existente en $destino, creando backup..."
-		mv "$destino" "$destino_$(date "+%a-%d_%h_%H-%M-%S-%N").bak"
+		mv "$destino" "${destino}_timestamp_$(date "+%a-%d_%h_%H-%M-%S-%N").bak"
 	fi
 
 	mkdir -p "$(dirname "$destino")"
@@ -128,6 +136,9 @@ esac
 echo "instalando paquetes escenciales"
 install_loop "pacman" "${CORE_PKGS[@]}"
 
+echo "instalando fuentes necesarias"
+install_loop "pacman" "${FONT_PKGS[@]}"
+
 echo "instalando paquetes de utilidades generales"
 install_loop "pacman" "${UTILS_PKGS[@]}"
 
@@ -136,3 +147,4 @@ install_loop "pacman" "${UTILS_PKGS[@]}"
 ###############################
 
 link_config "$DOTFILES_DIR/hypr" "$CONFIG_DIR/hypr"
+hyprctl reload
