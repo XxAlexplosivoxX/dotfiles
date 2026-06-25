@@ -1,13 +1,3 @@
----------------------
----- MY PROGRAMS ----
----------------------
-
--- Set programs that you use
-local terminal    = "kitty"
-local fileManager = "nautilus"
-local menu        = "hyprlauncher"
-
-
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
@@ -35,3 +25,16 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+
+---------------------
+---- MY PROGRAMS ----
+---------------------
+
+-- Set programs that you use
+local prefs = {
+	terminal    = "kitty",
+	fileManager = "nautilus",
+	menu        = "hyprlauncher"
+}
+
+return prefs
