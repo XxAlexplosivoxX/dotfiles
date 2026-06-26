@@ -7,8 +7,8 @@
 require("conf.monitors")
 
 -- 2. Configuración del Sistema (Gaps, bordes, layouts, variables de entorno)
-require("conf.settings")
 require("conf.preferences")
+require("conf.settings")
 
 -- 3. Input (Teclado, mouse, touchpad, distribución de idioma)
 require("conf.input")
