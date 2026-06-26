@@ -9,7 +9,7 @@ WALLPAPER="$1"
 
 # 1. Ejecutar wallust (esto lee wallust.toml y escribe en todos tus 'target')
 echo "[+] Extrayendo colores y aplicando plantillas..."
-wallust run "$WALLPAPER"
+wallust run --backend fastresize --palette kmeans "$WALLPAPER"
 
 # 2. Actualizar el fondo en tu gestor Wayland (awww)
 echo "[+] Seteando fondo de pantalla con awww..."

@@ -23,3 +23,8 @@ target = "~/.config/kitty/colors-wallust.conf"
 [templates.waybar]
 template = "waybar/waybar.tmpl"
 target = "~/.config/waybar/colors-wallust.css"
+
+
+[templates.hyprland]
+template = "hyprland/hyprland.tmpl"
+target = "~/.config/hypr/conf/colors.lua"
