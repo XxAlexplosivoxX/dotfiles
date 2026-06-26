@@ -9,7 +9,7 @@ WALLPAPER="$1"
 
 # 1. Ejecutar wallust (esto lee wallust.toml y escribe en todos tus 'target')
 echo "[+] Extrayendo colores y aplicando plantillas..."
-wallust run --backend fastresize --palette kmeans "$WALLPAPER"
+wallust run --backend full --palette ansi "$WALLPAPER"
 
 # 2. Actualizar el fondo en tu gestor Wayland (awww)
 echo "[+] Seteando fondo de pantalla con awww..."
@@ -23,4 +23,10 @@ fi
 # 4. Forzar a Waybar a recargar su CSS con los nuevos colores de wallust
 if pgrep -x "waybar" > /dev/null; then
     killall -USR2 waybar
+fi
+
+# Forzar la recarga en caliente de Hyprland para que vuelva a parsear los módulos Lua
+if pgrep -x "Hyprland" > /dev/null; then
+    echo "[+] Recargando bordes de Hyprland..."
+    hyprctl reload
 fi

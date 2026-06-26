@@ -190,8 +190,6 @@ install_loop "pacman" "${AUR_PKGS[@]}"
 
 link_config "$DOTFILES_DIR/hypr" "$CONFIG_DIR/hypr"
 link_config "$DOTFILES_DIR/kitty" "$CONFIG_DIR/kitty"
-link_config "$DOTFILES_DIR/gtk4.0" "$CONFIG_DIR/gtk4.0"
-link_config "$DOTFILES_DIR/gtk3.0" "$CONFIG_DIR/gtk3.0"
 link_config "$DOTFILES_DIR/wallust" "$CONFIG_DIR/wallust"
 
 mkdir -p ~/.local/bin
