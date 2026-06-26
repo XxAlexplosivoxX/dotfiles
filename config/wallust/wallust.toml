@@ -1,10 +1,3 @@
-[opts]
-backend = "thief"
-color_space = "lab"
-threshold = 11
-# Opciones estables: "dark", "light", "harddark"
-filter = "dark"
-
 # --- 1. TEMAS GTK3 Y GTK4 ---
 [templates.gtk3]
 template = "gtk3.0/style.tmpl"
