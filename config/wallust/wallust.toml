@@ -24,7 +24,12 @@ target = "~/.config/kitty/colors-wallust.conf"
 template = "waybar/waybar.tmpl"
 target = "~/.config/waybar/colors-wallust.css"
 
-
+# --- 4. HYPRLAND ---
 [templates.hyprland]
 template = "hyprland/hyprland.tmpl"
 target = "~/.config/hypr/conf/colors.lua"
+
+# --- 5. FUZZEL ---
+[templates.fuzzel]
+template = "fuzzel/fuzzel.tmpl"
+target = "~/.config/fuzzel/fuzzel.ini"
