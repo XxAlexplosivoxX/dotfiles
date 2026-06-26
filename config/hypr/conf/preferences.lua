@@ -33,7 +33,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 local prefs = {
 	terminal    = "kitty",
 	fileManager = "nautilus",
-	menu        = "hyprlauncher"
+	menu        = "fuzzel"
 }
 
 return prefs
