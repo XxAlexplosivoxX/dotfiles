@@ -212,8 +212,8 @@ else
 	echo "Fish ya es tu shell por defecto."
 fi
 
-fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-fish -c "fisher install IlanCosman/tide@v6"
-fish -c "tide configure"
+# fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+# fish -c "fisher install IlanCosman/tide@v6"
+# fish -c "tide configure"
 
 hyprctl reload
